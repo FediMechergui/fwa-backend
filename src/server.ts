@@ -2,9 +2,9 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import { router as contactRouter } from './v1/contact.route';
-import { testRouter } from './v1/test.route';
-import { initWhatsApp } from './whatsapp/client';
+import { router as contactRouter } from './v1/contact.route.js';
+import { testRouter } from './v1/test.route.js';
+import { initWhatsApp } from './whatsapp/client.js';
 
 const app = express();
 

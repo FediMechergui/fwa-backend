@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { z } from 'zod';
-import { Contact } from './contact.model';
-import { sendWhatsAppMessage } from '../whatsapp/client';
-import { sendWhatsAppCloudMessage } from '../whatsapp/cloud';
+import { Contact } from './contact.model.js';
+import { sendWhatsAppMessage } from '../whatsapp/client.js';
+import { sendWhatsAppCloudMessage } from '../whatsapp/cloud.js';
 
 export const router = Router();
 
