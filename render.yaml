@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: fwa-backend
+    rootDir: backend
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: WHATSAPP_PROVIDER
+        value: web
+
