@@ -15,7 +15,12 @@ testRouter.post('/send', async (req, res) => {
   if (!parsed.success) {
     return res.status(400).json({ error: parsed.error.flatten() });
   }
-  const { to, text } = parsed.data;
+  const rawTo = parsed.data.to;
+  const to = rawTo.replace(/\D/g, '');
+  if (to.length < 6) {
+    return res.status(400).json({ error: 'Invalid target number' });
+  }
+  const { text } = parsed.data;
   const provider = (process.env.WHATSAPP_PROVIDER || 'web').toLowerCase();
   try {
     if (provider === 'cloud') {

@@ -1,8 +1,11 @@
 import WhatsAppWeb from 'whatsapp-web.js';
+// Loose type import to avoid TS2749 errors on environments without types
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const { Client, LocalAuth } = WhatsAppWeb as unknown as { Client: any; LocalAuth: any };
 import qrcode from 'qrcode-terminal';
 
-let client: Client | null = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let client: any | null = null;
 let readyPromise: Promise<void> | null = null;
 
 export async function initWhatsApp(): Promise<void> {
@@ -42,7 +45,7 @@ export async function initWhatsApp(): Promise<void> {
   }
 
   readyPromise = new Promise((resolve) => {
-    client!.on('qr', (qr) => {
+    client!.on('qr', (qr: string) => {
       console.log('WhatsApp QR code (scan in WhatsApp):');
       try {
         qrcode.generate(qr, { small: true });
