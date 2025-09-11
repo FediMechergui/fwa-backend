@@ -59,6 +59,16 @@ router.post('/', async (req, res) => {
   res.status(201).json({ id: saved._id });
 });
 
+// List all contacts (basic dashboard data)
+router.get('/', async (_req, res) => {
+  try {
+    const contacts = await Contact.find({}).sort({ createdAt: -1 }).lean();
+    res.json({ items: contacts });
+  } catch (err: any) {
+    res.status(500).json({ error: String(err?.message || err) });
+  }
+});
+
 function buildWhatsAppMessage(data: any): string {
   const projectTypes: string[] = Array.isArray(data.projectTypes) ? data.projectTypes : [];
   const additionalFeatures: string[] = Array.isArray(data.additionalFeatures) ? data.additionalFeatures : [];
